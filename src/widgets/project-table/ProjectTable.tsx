@@ -1,5 +1,14 @@
 import { Link } from 'react-router-dom';
 import type { Project } from '#/domain/project';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '#/components/ui/table';
+import { Button } from '#/components/ui/button';
 
 interface ProjectTableProps {
   projects: Project[];
@@ -8,29 +17,31 @@ interface ProjectTableProps {
 
 export function ProjectTable({ projects, onDelete }: ProjectTableProps) {
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Status</th>
-          <th>Tasks</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Name</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Tasks</TableHead>
+          <TableHead>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {projects.map((project) => (
-          <tr key={project.id}>
-            <td>
+          <TableRow key={project.id}>
+            <TableCell>
               <Link to={`/projects/${project.id}`}>{project.name}</Link>
-            </td>
-            <td>{project.status}</td>
-            <td>{project.tasksCount}</td>
-            <td>
-              <button onClick={() => onDelete(project.id)}>Delete</button>
-            </td>
-          </tr>
+            </TableCell>
+            <TableCell>{project.status}</TableCell>
+            <TableCell>{project.tasksCount}</TableCell>
+            <TableCell>
+              <Button variant="destructive" onClick={() => onDelete(project.id)}>
+                Delete
+              </Button>
+            </TableCell>
+          </TableRow>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   );
 }

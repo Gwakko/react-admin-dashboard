@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useProjects, useCreateProject, useDeleteProject } from '#/features/project-list';
 import { ProjectTable } from '#/widgets/project-table';
+import { Button } from '#/components/ui/button';
 
 export default function ProjectsPage() {
   const [page, setPage] = useState(1);
@@ -23,16 +24,16 @@ export default function ProjectsPage() {
     <div>
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>Projects</h1>
-        <button onClick={handleCreate}>+ New Project</button>
+        <Button onClick={handleCreate}>+ New Project</Button>
       </header>
 
       <ProjectTable projects={projects} onDelete={handleDelete} />
 
       {lastPage > 1 && (
         <div style={{ marginTop: '1rem' }}>
-          <button disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>Prev</button>
+          <Button variant="outline" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>Prev</Button>
           <span style={{ margin: '0 1rem' }}>{page} / {lastPage}</span>
-          <button disabled={page >= lastPage} onClick={() => setPage((p) => p + 1)}>Next</button>
+          <Button variant="outline" disabled={page >= lastPage} onClick={() => setPage((p) => p + 1)}>Next</Button>
         </div>
       )}
     </div>

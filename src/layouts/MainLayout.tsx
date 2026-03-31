@@ -1,4 +1,5 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Button } from '#/components/ui/button';
 
 export function MainLayout() {
   const navigate = useNavigate();
@@ -13,13 +14,14 @@ export function MainLayout() {
       <nav style={{ borderBottom: '1px solid #e5e7eb', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ fontWeight: 'bold', marginRight: '1rem' }}>Dashboard</Link>
         <Link to="/projects">Projects</Link>
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={handleLogout}
-          style={{ marginLeft: 'auto', padding: '0.25rem 0.75rem', cursor: 'pointer' }}
+          style={{ marginLeft: 'auto' }}
         >
           Logout
-        </button>
+        </Button>
       </nav>
       <Outlet />
     </div>

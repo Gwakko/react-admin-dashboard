@@ -1,3 +1,5 @@
+import { Button } from '#/components/ui/button';
+
 const STATUSES = ['', 'pending', 'in_progress', 'done', 'cancelled'] as const;
 
 interface StatusFilterProps {
@@ -9,13 +11,13 @@ export function StatusFilter({ current, onChange }: StatusFilterProps) {
   return (
     <div style={{ display: 'flex', gap: '0.5rem' }}>
       {STATUSES.map((s) => (
-        <button
+        <Button
           key={s}
+          variant={current === s ? 'default' : 'outline'}
           onClick={() => onChange(s)}
-          style={{ fontWeight: current === s ? 'bold' : 'normal' }}
         >
           {s || 'All'}
-        </button>
+        </Button>
       ))}
     </div>
   );

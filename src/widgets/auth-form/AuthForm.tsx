@@ -1,4 +1,8 @@
 import { type FormEvent, useState } from 'react';
+import { Card, CardHeader, CardContent, CardTitle } from '#/components/ui/card';
+import { Input } from '#/components/ui/input';
+import { Label } from '#/components/ui/label';
+import { Button } from '#/components/ui/button';
 
 interface AuthFormProps {
   mode: 'login' | 'register';
@@ -20,40 +24,44 @@ export function AuthForm({ mode, onSubmit, error, loading }: AuthFormProps) {
   const buttonLabel = mode === 'login' ? 'Log In' : 'Register';
 
   return (
-    <div style={{ maxWidth: '400px', margin: '4rem auto', padding: '2rem' }}>
-      <h1>{title}</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '0.25rem' }}>
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{ width: '100%', padding: '0.5rem', boxSizing: 'border-box' }}
-          />
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label htmlFor="password" style={{ display: 'block', marginBottom: '0.25rem' }}>
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ width: '100%', padding: '0.5rem', boxSizing: 'border-box' }}
-          />
-        </div>
-        <button type="submit" disabled={loading} style={{ padding: '0.5rem 1rem' }}>
-          {loading ? 'Please wait...' : buttonLabel}
-        </button>
-      </form>
+    <div style={{ maxWidth: '400px', margin: '4rem auto' }}>
+      <Card>
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {error && <p style={{ color: 'red', marginBottom: '1rem' }}>{error}</p>}
+          <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom: '1rem' }}>
+              <Label htmlFor="email" style={{ marginBottom: '0.25rem' }}>
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div style={{ marginBottom: '1rem' }}>
+              <Label htmlFor="password" style={{ marginBottom: '0.25rem' }}>
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <Button type="submit" disabled={loading}>
+              {loading ? 'Please wait...' : buttonLabel}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }
